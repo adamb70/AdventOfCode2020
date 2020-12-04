@@ -1,6 +1,3 @@
-import math
-
-
 class Map:
     def __init__(self, map_file):
         with open(map_file, 'r') as infile:
@@ -30,8 +27,7 @@ def count_trees_slope(slope_map: Map, slope: Vec2) -> int:
 
         # Loop width if outside width bounds
         if pos.x >= slope_map.width:
-            multiplier = math.ceil(pos.x / slope_map.width) or 1  # If 0 set to 1 to address zero index edge case
-            pos.x = pos.x - (slope_map.width * multiplier)
+            pos.x %= slope_map.width
 
         # Check if hitting a tree
         if slope_map.grid[pos.y][pos.x] == '#':
